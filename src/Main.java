@@ -16,24 +16,46 @@ public class Main {
         }
 
         Goblin enemy = new Goblin("Goblin 1");
-        System.out.println("A wild " + enemy.getClass().getSimpleName() + " appeared!");
+        System.out.println("A wild " + enemy.getName() + " appeared!");
+        System.out.println("\nPress Enter to continue...");
+        scanner.nextLine();
 
         while (player.isAlive() && enemy.isAlive()) {
+            System.out.println("\nChoose an action:");
+            System.out.println("1. Attack");
+            System.out.println("2. Use Skill");
 
+            int action = scanner.nextInt();
             scanner.nextLine();
-            player.attack(enemy);
 
-            if (!enemy.isAlive()) {
-                System.out.println(enemy.getName() + " is defeated!");
-                break;
+            switch (action) {
+                case 1 -> {
+                    player.attack(enemy);
+                    System.out.println("\nPress Enter to continue...");
+                    scanner.nextLine();
+                }
+                case 2 -> {
+                    System.out.println("Choose a skill:");
+                    for (int i = 0; i < player.getSkills().size(); i++) {
+                        System.out.println((i + 1) + ". " + player.getSkills().get(i).getName());
+                    }
+                    int skillChoice = scanner.nextInt() - 1;
+                    scanner.nextLine();
+                    player.useSkill(skillChoice, enemy);
+                    System.out.println("\nPress Enter to continue...");
+                    scanner.nextLine();
+                }
+                default -> {
+                    System.out.println("Invalid choice.");
+                    continue; // Повторяем ввод
+                }
             }
 
-            scanner.nextLine();
-            enemy.attack(player);
-
-            if (!player.isAlive()) {
-                System.out.println(player.getName() + " is defeated! Game over.");
-                break;
+            if (enemy.isAlive()) {
+                System.out.println("\nEnemy's turn...");
+                enemy.attack(player);
+                System.out.println("\nPress Enter to continue...");
+                scanner.nextLine();
             }
         }
 

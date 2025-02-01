@@ -1,7 +1,7 @@
 public abstract class Enemy extends Creature {
 
-    public Enemy(String name, int health, int attack, int defence) {
-        super(name, health, attack, defence);
+    public Enemy(String name, int health, int attack, int defence, int mana, int stamina) {
+        super(name, health, attack, defence, mana, stamina);
     }
 
     public void roar() {

@@ -1,15 +1,22 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Creature {
     private String name;
     private int health;
     private int attack;
     private int defense;
-    private float crit_chance;
+    private int mana;
+    private int stamina;
+    private List<SkillInstance> skills = new ArrayList<>();
 
-    public Creature(String name, int health, int attack, int defense) {
+    public Creature(String name, int health, int attack, int defense, int mana, int stamina) {
         this.name = name;
         this.health = health;
         this.attack = attack;
         this.defense = defense;
+        this.mana = mana;
+        this.stamina = stamina;
     }
 
     public void takeDamage(int damage) {
@@ -17,40 +24,53 @@ public abstract class Creature {
         System.out.println(name + " takes " + damage + " damage. Remaining health: " + health);
     }
 
-    public abstract void attack(Creature target);
+    public void attack(Creature target) {
+        System.out.println(name + " attacks " + target.getName() + "!");
+        target.takeDamage(attack);
+    }
 
     public boolean isAlive() {
         return health > 0;
     }
 
-    // GETTERS AND SETTERS
+    public void addSkill(Skill skill) {
+        skills.add(new SkillInstance(skill, this));
+    }
 
-    public String getName(){
+    public void useSkill(int skillIndex, Creature target) {
+        if (skillIndex >= 0 && skillIndex < skills.size()) {
+            skills.get(skillIndex).use(target);
+        } else {
+            System.out.println("Invalid skill choice.");
+        }
+    }
+
+    public List<SkillInstance> getSkills() {
+        return skills;
+    }
+
+    public String getName() {
         return this.name;
-    }
-
-    public int getHealth() {
-        return this.health;
-    }
-
-    public int getDefense() {
-        return this.defense;
     }
 
     public int getAttack() {
         return this.attack;
     }
 
-    public float getCrit() {
-        return this.crit_chance;
+    public int getDefence() {
+        return this.defense;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public int getHealth() {
+        return this.health;
     }
 
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setDefense(int defense) {
@@ -61,9 +81,19 @@ public abstract class Creature {
         this.attack = attack;
     }
 
-    public void setCrit(int crit) {
-        this.crit_chance = crit;
+    public int getMana() {
+        return mana;
     }
 
+    public void setMana(int mana) {
+        this.mana = mana;
+    }
 
+    public int getStamina() {
+        return stamina;
+    }
+
+    public void setStamina(int stamina) {
+        this.stamina = stamina;
+    }
 }

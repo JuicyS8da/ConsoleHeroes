@@ -1,7 +1,8 @@
 public class Warrior extends Hero {
 
     public Warrior(String name) {
-        super(name, 100, 20, 15);
+        super(name, 100, 20, 15, 20, 100);
+        addSkill(new SlaySkill());
     }
 
     @Override
@@ -10,4 +11,3 @@ public class Warrior extends Hero {
         target.takeDamage(getAttack());
     }
 }
-

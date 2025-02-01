@@ -1,8 +1,8 @@
 public abstract class Hero extends Creature {
     private final int max_health;
 
-    public Hero(String name, int health, int attack, int defence) {
-        super(name, health, attack, defence);
+    public Hero(String name, int health, int attack, int defence, int mana, int stamina) {
+        super(name, health, attack, defence, mana, stamina);
         this.max_health = health;
     }
 
@@ -16,6 +16,7 @@ public abstract class Hero extends Creature {
         }
 
     }
+
 
     public int getMax_health() {
         return this.max_health;
