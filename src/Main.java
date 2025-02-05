@@ -9,9 +9,9 @@ public class Main {
         Creature player;
 
         switch (choice) {
-            case 1 -> player = new Warrior("Mighty");
-            // case 2 -> player = new Mage("player");
-            // case 3 -> player = new Archer("player");
+            case 1 -> player = new Warrior("Ragnar");
+            case 2 -> player = new Mage("Eldrin");
+            case 3 -> player = new Archer("Faelwyn");
             default -> throw new IllegalArgumentException("Invalid choice");
         }
 
@@ -47,7 +47,7 @@ public class Main {
                 }
                 default -> {
                     System.out.println("Invalid choice.");
-                    continue; // Повторяем ввод
+                    continue;
                 }
             }
 
